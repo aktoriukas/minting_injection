@@ -299,4 +299,4 @@ function main() {
   })
 }
 
-window.addEventListener("load", () => main())
+window.addEventListener("DOMContentLoaded", () => main())
