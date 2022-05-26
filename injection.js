@@ -265,7 +265,6 @@ function main() {
   const setStatus = (string) => (document.querySelector("#nft-status").innerHTML = string)
 
   const handleMintNFT = async (walletAddress) => {
-    await ethereum.request({ method: "eth_requestAccounts" })
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
 
@@ -282,10 +281,11 @@ function main() {
     console.log(tx)
   }
 
-  mint_NFT_btn.addEventListener("click", () => {
+  mint_NFT_btn.addEventListener("click", async () => {
     //Will Start the metamask extension
 
     const walletAddress = document.querySelector("#nft-wallet-address").value
+    await ethereum.request({ method: "eth_requestAccounts" })
 
     if (!isMetaMaskInstalled()) setErr("MetaMask is not installed")
     else if (!isMetaMaskLoggedIn()) setErr("MetaMask is not logged in")
@@ -298,5 +298,7 @@ function main() {
     }
   })
 }
+
+console.log("injected")
 
 window.addEventListener("DOMContentLoaded", () => main())
